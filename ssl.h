@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-
+#include <fcntl.h>
 struct sha256_ctx {
 	uint32_t data[64];
 	uint32_t datalen;

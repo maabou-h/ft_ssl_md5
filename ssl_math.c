@@ -53,5 +53,5 @@ uint32_t sha_sig0(uint32_t x)
 
 uint32_t md5_lrot(uint32_t x, uint32_t y)
 {
-    return ((x << c) | (x >> (32 - c)));
+    return ((x << y) | (x >> (32 - y)));
 }
