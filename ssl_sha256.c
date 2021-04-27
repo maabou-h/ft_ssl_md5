@@ -44,7 +44,7 @@ static void sha256_transform(struct sha256_ctx *ctx, uint32_t data[])
         ctx->state[i] += blocks[i];
 }
 
-void sha256(uint8_t s[])
+void sha256()
 {
     uint32_t i, x;
     uint8_t digest[32];
@@ -54,9 +54,9 @@ void sha256(uint8_t s[])
 	ctx.bitlen = 0;
 	for (x = 0; x < 8; ++x)
 		ctx.state[x] = st[x];
-	for (x = 0; x < strlen((char*)s); ++x)
+	for (x = 0; x < strlen((char*)context.data); ++x)
     {
-		ctx.data[ctx.datalen] = s[x];
+		ctx.data[ctx.datalen] = context.data[x];
 		ctx.datalen++;
 		if (ctx.datalen == 64)
         {
