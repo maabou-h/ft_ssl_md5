@@ -95,6 +95,7 @@ void sha256()
 		digest[i + 24] = (ctx.state[6] >> (24 - i * 8)) & 0x000000ff;
 		digest[i + 28] = (ctx.state[7] >> (24 - i * 8)) & 0x000000ff;
 	}
+    printf("%s)= ", context.ctx);
     for(x = 0; x < 32; ++x)
         printf("%02x", digest[x]);
     printf("\n");

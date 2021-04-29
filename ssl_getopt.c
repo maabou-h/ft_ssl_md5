@@ -12,7 +12,6 @@ uint8_t *readfile(void)
 	{
 		if (rbuf != NULL)
 		{
-			printf("%lu\n", strlen((char*)rbuf));
 			tbuf = (uint8_t*)ft_strdup((char*)rbuf);
 			free(rbuf);
 			rbuf = (uint8_t*)ft_strjoin((char*)tbuf, (char*)buffer);
@@ -29,7 +28,7 @@ uint8_t ssl_getopt(uint32_t nargs, char* args[], uint32_t *optind)
 {
     if (*optind == nargs)
         return 'e';
-	if (!strcmp("-h", args[*optind]) || !strcmp("--help", args[*optind]))
+	else if (!strcmp("-h", args[*optind]) || !strcmp("--help", args[*optind]))
 	{
 		return 'h';
 	}
@@ -37,6 +36,7 @@ uint8_t ssl_getopt(uint32_t nargs, char* args[], uint32_t *optind)
 	{
        *optind += 1;
 	   context.data = (uint8_t*)args[*optind];
+	   context.ctx = (uint8_t*)ft_strjoin("string(", args[*optind]);
 		return 's';
 	}
 	else if (!strcmp("--quiet", args[*optind]) || !strcmp("-q", args[*optind]))
@@ -52,9 +52,10 @@ uint8_t ssl_getopt(uint32_t nargs, char* args[], uint32_t *optind)
 	context.fd = open(args[*optind], O_RDONLY);
 	if (context.fd != -1)
 	{
+		context.ctx = (uint8_t*)ft_strjoin(context.hfun == 1 ? "MD5(" : "SHA256(", args[*optind]);
 		context.data = readfile();
-		context.flags |= (1 << 8);
-		printf("%s\n", context.data);
+		if (!context.data)
+			context.data = (uint8_t*)ft_strdup("");
 		return 'f';
 	}
 	else

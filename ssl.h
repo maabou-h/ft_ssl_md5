@@ -21,6 +21,7 @@ struct ssl_ctx {
 	uint8_t flags;
 	int8_t	fd;
 	uint8_t	*data;
+	uint8_t *ctx;
 };
 
 extern struct ssl_ctx context;

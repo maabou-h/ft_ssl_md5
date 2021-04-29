@@ -73,6 +73,7 @@ void md5()
     w32_to_byte(hblock[3], digest + 12);
     if ((context.flags & (1 << 2))) printf("reverse format\n");
     if ((context.flags & (1 << 1))) printf("quiet format\n");
+    printf("%s)= ", context.ctx);
     for (i = 0; i < 16; i++)
         printf("%2.2x", digest[i]);
     printf("\n");

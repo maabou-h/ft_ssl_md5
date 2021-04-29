@@ -28,41 +28,37 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
             printf("bad usage\n");
 			ret = 1;
 			break;
-        case 'f':
-            break;
-        case 'q':
-            break ;
-        case 'r':
-            break ;
         case 'i':
             printf("invalid file: %s\n", args[optind]);
             ret = 1;
             break;
-        case 's':
-			break;
         case 'e':
             ret = 1;
             break;
+        default:
+            break;
 			if (ret)
-				return (-1);
+				return (1);
 		}
 		optind++;
 	}
     if (!context.data && context.fd != -1)
     {
+        context.ctx = (uint8_t*)ft_strdup("(stdin");
         context.fd = 0;
         context.data = readfile();
+        if (!context.data)
+			context.data = (uint8_t*)ft_strdup("");
     }
     return (0);
 }
 
 int main(int argc, char **argv)
 {
-    int i;
- 
     if (argc > 1)
     {
-        i = parseargs(argc, (uint8_t**)argv);
+        if (parseargs(argc, (uint8_t**)argv))
+            return (1);
          if (context.hfun == 1)
          {
             md5();
