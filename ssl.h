@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft/libft.h"
+#include "libft/ft_printf.h"
 
 struct sha256_ctx {
 	uint32_t data[64];

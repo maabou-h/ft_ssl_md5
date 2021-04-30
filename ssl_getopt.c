@@ -49,6 +49,11 @@ uint8_t ssl_getopt(uint32_t nargs, char* args[], uint32_t *optind)
 		context.flags |= (1 << 2);
 		return 'r';
 	}
+	else if (!strcmp("--print", args[*optind]) || !strcmp("-p", args[*optind]))
+	{
+		context.flags |= (1 << 3);
+		return 'p';
+	}
 	context.fd = open(args[*optind], O_RDONLY);
 	if (context.fd != -1)
 	{

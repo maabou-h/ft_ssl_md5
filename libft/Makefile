@@ -13,6 +13,21 @@
 NAME	=	libft.a
 
 SRCS	=	ft_printf.c\
+			ft_csp_case.c\
+			ft_di_case.c\
+			ft_di_helper.c\
+			ft_flags.c\
+			ft_o_case.c\
+			ft_o_helper.c\
+			ft_p_helper.c\
+			ft_tools.c\
+			ft_tools2.c\
+			ft_u_case.c\
+			ft_u_helper.c\
+			ft_x_case.c\
+			ft_x_helper.c\
+			ft_xu_case.c\
+			ft_xu_helper.c\
 			ft_atoi.c \
 			ft_is_int.c \
 			ft_bzero.c \

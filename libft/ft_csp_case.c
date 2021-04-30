@@ -25,7 +25,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int		ft_putchar(unsigned char c, t_pf *raw)
+int		ft_pputchar(unsigned char c, t_pf *raw)
 {
 	int		i;
 
@@ -48,7 +48,7 @@ int		ft_putchar(unsigned char c, t_pf *raw)
 	return (i);
 }
 
-int		ft_putstr(char const *s, t_pf *raw)
+int		ft_pputstr(char const *s, t_pf *raw)
 {
 	int		i;
 	int		j;
@@ -79,15 +79,12 @@ int		ft_putstr(char const *s, t_pf *raw)
 
 int		ft_csp_case(t_pf *raw, va_list ap)
 {
-	int		i;
-
-	i = 0;
 	if (raw->id == 'c')
-		return (ft_putchar((unsigned char)va_arg(ap, int), raw));
+		return (ft_pputchar((unsigned char)va_arg(ap, int), raw));
 	else if (raw->id == '%')
-		return (ft_putchar('%', raw));
+		return (ft_pputchar('%', raw));
 	else if (raw->id == 's')
-		return (ft_putstr(va_arg(ap, char*), raw));
+		return (ft_pputstr(va_arg(ap, char*), raw));
 	else if (raw->id == 'p')
 		return (ft_append_p((uintmax_t)va_arg(ap, void*), 16, raw));
 	return (-1);

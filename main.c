@@ -8,12 +8,12 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
 	uint32_t optind = 2;
 	int32_t ret = 0;
 
-    if (nargs < optind || (strcmp("md5", (char*)args[optind-1]) && strcmp("sha256", (char*)args[optind-1])))
+    if (nargs < optind || (ft_strcmp("md5", (char*)args[optind-1]) && ft_strcmp("sha256", (char*)args[optind-1])))
         {
-            printf("no algo specified as first argument\n");
+            ft_printf("no algo specified as first argument\n");
             return (-1);
         }
-    context.hfun = !strcmp("md5", (char*)args[optind-1]) ? 1 : 2;
+    context.hfun = !ft_strcmp("md5", (char*)args[optind-1]) ? 1 : 2;
     context.flags = 0;
     context.data = NULL;
 	while (ret == 0 && (opt = ssl_getopt(nargs, (char**)args, &optind)))
@@ -21,24 +21,23 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
 		switch (opt)
 		{
 		case 'h':
-            printf("help menu\n");
+            ft_printf("help menu\n");
 			ret = 1;
 			break;
         case 'b':
-            printf("bad usage\n");
+            ft_printf("bad usage\n");
 			ret = 1;
 			break;
         case 'i':
-            printf("invalid file: %s\n", args[optind]);
+            ft_printf("invalid file: %s\n", args[optind]);
             ret = 1;
             break;
         case 'e':
-            ret = 1;
             break;
+        if (ret)
+			return (1);    
         default:
             break;
-			if (ret)
-				return (1);
 		}
 		optind++;
 	}

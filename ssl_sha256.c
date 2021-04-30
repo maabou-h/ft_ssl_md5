@@ -78,7 +78,7 @@ void sha256()
 		while (i < 64)
 			ctx.data[i++] = 0x00;
 		sha256_transform(&ctx, ctx.data);
-		memset(ctx.data, 0, 56);
+		ft_memset(ctx.data, 0, 56);
 	}
 	ctx.bitlen += ctx.datalen * 8;
     w32_to_4bytes(ctx.bitlen, &ctx.data[60]);
@@ -95,8 +95,19 @@ void sha256()
 		digest[i + 24] = (ctx.state[6] >> (24 - i * 8)) & 0x000000ff;
 		digest[i + 28] = (ctx.state[7] >> (24 - i * 8)) & 0x000000ff;
 	}
-    printf("%s)= ", context.ctx);
-    for(x = 0; x < 32; ++x)
-        printf("%02x", digest[x]);
-    printf("\n");
+	if ((context.flags & (1 << 3)))
+		ft_printf("%s", context.data);
+	if (!(context.flags & (1 << 1)))
+        ft_printf("%s)= ", context.ctx);
+	if ((context.flags & (1 << 2)))
+    {
+    	for(int8_t z = 31; z >= 0; --z)
+        ft_printf("%02x", digest[z]);
+    }
+    else
+    {
+    	for(int8_t z = 0; z < 32; ++z)
+        ft_printf("%02x", digest[z]);
+    }
+    ft_printf("\n");
 }

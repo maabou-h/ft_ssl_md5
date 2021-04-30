@@ -27,11 +27,11 @@ void md5()
     uint32_t i, tblock;
     uint32_t w[16], blocks[4], pos[2];
 
-    slen = strlen((const char*)context.data);
+    slen = ft_strlen((const char*)context.data);
     for (len = slen + 1; len % 64 != 56; len++)
         ;
     msg = (uint8_t*)malloc(len + 8);
-    memcpy(msg, context.data, slen);
+    ft_memcpy(msg, context.data, slen);
     msg[slen] = 0x80;
     for (offset = slen + 1; offset < len; offset++)
         msg[offset] = 0;
@@ -71,10 +71,19 @@ void md5()
     w32_to_byte(hblock[1], digest + 4);
     w32_to_byte(hblock[2], digest + 8);
     w32_to_byte(hblock[3], digest + 12);
-    if ((context.flags & (1 << 2))) printf("reverse format\n");
-    if ((context.flags & (1 << 1))) printf("quiet format\n");
-    printf("%s)= ", context.ctx);
-    for (i = 0; i < 16; i++)
-        printf("%2.2x", digest[i]);
+    if ((context.flags & (1 << 3)))
+		printf("%s", context.data);
+    if (!(context.flags & (1 << 1)))
+        printf("%s)= ", context.ctx);
+    if ((context.flags & (1 << 2)))
+    {
+        for (int8_t z = 15; z >= 0; --z)
+        printf("%2.2x", digest[z]);
+    }
+    else
+    {
+        for (int8_t z = 0; z < 16; ++z)
+        printf("%2.2x", digest[z]);
+    }
     printf("\n");
 }

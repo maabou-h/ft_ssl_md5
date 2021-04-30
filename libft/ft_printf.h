@@ -18,6 +18,7 @@
 # include <float.h>
 # include <stdlib.h>
 # include <stdarg.h>
+#include <stdint.h>
 
 # define F_H 2
 # define F_Z 4
@@ -44,8 +45,8 @@ typedef struct	s_pf
 
 int				ft_rawlenm(intmax_t nbr, int base);
 size_t			ft_strlen(const char *s);
-int				ft_putchar(unsigned char c, t_pf *raw);
-int				ft_putstr(char const *s, t_pf *raw);
+int				ft_pputchar(unsigned char c, t_pf *raw);
+int				ft_pputstr(char const *s, t_pf *raw);
 int				ft_csp_case(t_pf *raw, va_list ap);
 int				ft_append_di(long long int n, int base, t_pf *raw);
 int				ft_di_case(t_pf *raw, va_list ap);
