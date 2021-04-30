@@ -5,7 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <unistd.h>
 #include <fcntl.h>
+#include "libft/libft.h"
+
 struct sha256_ctx {
 	uint32_t data[64];
 	uint32_t datalen;
@@ -13,9 +16,21 @@ struct sha256_ctx {
 	uint32_t state[8];
 };
 
-void md5(uint8_t s[]);
+struct ssl_ctx {
+	uint8_t hfun;
+	uint8_t flags;
+	int8_t	fd;
+	uint8_t	*data;
+	uint8_t *ctx;
+};
 
-void sha256(uint8_t s[]);
+extern struct ssl_ctx context;
+
+void md5();
+
+void sha256();
+
+uint8_t *readfile(void);
 
 void byte_to_w32(uint8_t val[], uint32_t *bytes);
 void w32_to_byte(uint32_t val, uint8_t bytes[]);

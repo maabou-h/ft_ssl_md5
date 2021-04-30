@@ -18,7 +18,7 @@ static const uint32_t r[64] = {
     6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
 };
 
-void md5(uint8_t s[])
+void md5()
 {
     uint8_t digest[16];
     uint32_t hblock[4] = {0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476};
@@ -27,11 +27,11 @@ void md5(uint8_t s[])
     uint32_t i, tblock;
     uint32_t w[16], blocks[4], pos[2];
 
-    slen = strlen((const char*)s);
+    slen = strlen((const char*)context.data);
     for (len = slen + 1; len % 64 != 56; len++)
         ;
     msg = (uint8_t*)malloc(len + 8);
-    memcpy(msg, s, slen);
+    memcpy(msg, context.data, slen);
     msg[slen] = 0x80;
     for (offset = slen + 1; offset < len; offset++)
         msg[offset] = 0;
@@ -71,6 +71,9 @@ void md5(uint8_t s[])
     w32_to_byte(hblock[1], digest + 4);
     w32_to_byte(hblock[2], digest + 8);
     w32_to_byte(hblock[3], digest + 12);
+    if ((context.flags & (1 << 2))) printf("reverse format\n");
+    if ((context.flags & (1 << 1))) printf("quiet format\n");
+    printf("%s)= ", context.ctx);
     for (i = 0; i < 16; i++)
         printf("%2.2x", digest[i]);
     printf("\n");
