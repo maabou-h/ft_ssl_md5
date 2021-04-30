@@ -65,7 +65,7 @@ int		ft_printf(const char *format, ...)
 	int		i;
 	int		j;
 	int		k;
-
+	
 	i = 0;
 	j = 0;
 	va_start(ap, format);

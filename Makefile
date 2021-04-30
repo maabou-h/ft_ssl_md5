@@ -26,10 +26,10 @@ RM		=	rm -f
 
 all		:	$(LIBS) $(NAME)
 
-$(NAME)	:	$(OBJS) $(INC)
+$(NAME)	:	$(OBJS) $(INC) libft/*.o libft/*.c
 	gcc $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
-$(LIBS)	:
+$(LIBS)	: libft/*.o libft/*.c
 	@$(MAKE) -C libft
 
 clean	:

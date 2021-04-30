@@ -9,14 +9,14 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
 	int32_t ret = 0;
 
     if (nargs < optind || (ft_strcmp("md5", (char*)args[optind-1]) && ft_strcmp("sha256", (char*)args[optind-1])))
-        {
+    {
             ft_printf("no algo specified as first argument\n");
             return (-1);
-        }
+    }
     context.hfun = !ft_strcmp("md5", (char*)args[optind-1]) ? 1 : 2;
     context.flags = 0;
     context.data = NULL;
-	while (ret == 0 && (opt = ssl_getopt(nargs, (char**)args, &optind)))
+	while (ret == 0 && (opt = ssl_getopt(nargs, (const char**)args, &optind)))
 	{
 		switch (opt)
 		{
@@ -33,15 +33,16 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
             ret = 1;
             break;
         case 'e':
-            break;
-        if (ret)
-			return (1);    
+            ret = -1;
+            break;  
         default:
             break;
 		}
+        if (ret && ret != -1)
+			return (1);
 		optind++;
 	}
-    if (!context.data && context.fd != -1)
+    if (!context.data)
     {
         context.ctx = (uint8_t*)ft_strdup("(stdin");
         context.fd = 0;
@@ -52,9 +53,9 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
     return (0);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char const* argv[])
 {
-    if (argc > 1)
+    if (argc >= 1)
     {
         if (parseargs(argc, (uint8_t**)argv))
             return (1);

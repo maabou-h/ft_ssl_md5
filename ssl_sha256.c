@@ -54,7 +54,7 @@ void sha256()
 	ctx.bitlen = 0;
 	for (x = 0; x < 8; ++x)
 		ctx.state[x] = st[x];
-	for (x = 0; x < strlen((char*)context.data); ++x)
+	for (x = 0; x < ft_strlen((char*)context.data); ++x)
     {
 		ctx.data[ctx.datalen] = context.data[x];
 		ctx.datalen++;

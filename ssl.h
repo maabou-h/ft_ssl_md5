@@ -45,6 +45,6 @@ uint32_t sha_sig0(uint32_t x);
 uint32_t sha_sig1(uint32_t x);
 uint32_t md5_lrot(uint32_t x, uint32_t y);
 
-uint8_t ssl_getopt(uint32_t nargs, char* args[], uint32_t *optind);
+uint8_t ssl_getopt(uint32_t nargs, char const* args[], uint32_t *optind);
 
 #endif

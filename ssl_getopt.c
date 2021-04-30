@@ -24,32 +24,32 @@ uint8_t *readfile(void)
 	return rbuf;
 }
 
-uint8_t ssl_getopt(uint32_t nargs, char* args[], uint32_t *optind)
+uint8_t ssl_getopt(uint32_t nargs, char const* args[], uint32_t *optind)
 {
     if (*optind == nargs)
         return 'e';
-	else if (!strcmp("-h", args[*optind]) || !strcmp("--help", args[*optind]))
+	else if (!ft_strcmp("-h", args[*optind]) || !ft_strcmp("--help", args[*optind]))
 	{
 		return 'h';
 	}
-	else if ((!strcmp("--string", args[*optind]) || !strcmp("-s", args[*optind])) && *optind + 1 < nargs)
+	else if ((!ft_strcmp("--string", args[*optind]) || !ft_strcmp("-s", args[*optind])) && *optind + 1 < nargs)
 	{
        *optind += 1;
 	   context.data = (uint8_t*)args[*optind];
-	   context.ctx = (uint8_t*)ft_strjoin("string(", args[*optind]);
+	   context.ctx = (uint8_t*)ft_strdup("MD5(string");
 		return 's';
 	}
-	else if (!strcmp("--quiet", args[*optind]) || !strcmp("-q", args[*optind]))
+	else if (!ft_strcmp("--quiet", args[*optind]) || !ft_strcmp("-q", args[*optind]))
 	{
 		context.flags |= (1 << 1);
 		return 'q';
 	}
-	else if (!strcmp("--reverse", args[*optind]) || !strcmp("-r", args[*optind]))
+	else if (!ft_strcmp("--reverse", args[*optind]) || !ft_strcmp("-r", args[*optind]))
 	{
 		context.flags |= (1 << 2);
 		return 'r';
 	}
-	else if (!strcmp("--print", args[*optind]) || !strcmp("-p", args[*optind]))
+	else if (!ft_strcmp("--print", args[*optind]) || !ft_strcmp("-p", args[*optind]))
 	{
 		context.flags |= (1 << 3);
 		return 'p';

@@ -105,14 +105,16 @@ SRCS	=	ft_printf.c\
 
 OBJS	=	$(SRCS:.c=.o)
 
+INCS	= libft.h ft_printf.h
+
 RM		=	rm -f
 
 CFLAGS	=	-Wall -Wextra -Werror
 
-$(NAME)	:	$(OBJS)
-	ar rc $(NAME) $(OBJS)
+all		:	$(NAME) $(OBJS) $(INCS)
 
-all		:	$(NAME)
+$(NAME)	:	$(OBJS) $(INCS)
+	ar rc $(NAME) $(OBJS)
 
 clean	:
 	$(RM) $(OBJS)

@@ -72,18 +72,18 @@ void md5()
     w32_to_byte(hblock[2], digest + 8);
     w32_to_byte(hblock[3], digest + 12);
     if ((context.flags & (1 << 3)))
-		printf("%s", context.data);
+		ft_printf("%s", context.data);
     if (!(context.flags & (1 << 1)))
-        printf("%s)= ", context.ctx);
+        ft_printf("%s)= ", context.ctx);
     if ((context.flags & (1 << 2)))
     {
         for (int8_t z = 15; z >= 0; --z)
-        printf("%2.2x", digest[z]);
+        ft_printf("%2.2x", digest[z]);
     }
     else
     {
         for (int8_t z = 0; z < 16; ++z)
-        printf("%2.2x", digest[z]);
+        ft_printf("%2.2x", digest[z]);
     }
-    printf("\n");
+    ft_printf("\n");
 }
