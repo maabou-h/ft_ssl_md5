@@ -16,6 +16,7 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
     context.hfun = !ft_strcmp("md5", (char*)args[optind-1]) ? 1 : 2;
     context.flags = 0;
     context.data = NULL;
+    context.fd = 0;
 	while (ret == 0 && (opt = ssl_getopt(nargs, (const char**)args, &optind)))
 	{
 		switch (opt)
@@ -29,17 +30,16 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
 			ret = 1;
 			break;
         case 'i':
-            ft_printf("invalid file: %s\n", args[optind]);
+            ft_printf("ft_ssl: invalid file: %s\n", args[optind]);
             ret = 1;
             break;
         case 'e':
-            ret = -1;
-            break;  
+            return (0); 
         default:
             break;
 		}
-        if (ret && ret != -1)
-			return (1);
+        if (ret)
+			break ;
 		optind++;
 	}
     if (!context.data)
@@ -50,25 +50,28 @@ int32_t parseargs(uint32_t nargs, uint8_t* args[])
         if (!context.data)
 			context.data = (uint8_t*)ft_strdup("");
     }
-    return (0);
+    return (ret);
 }
 
 int main(int argc, char const* argv[])
 {
+    uint8_t ret = 1;
+
     if (argc >= 1)
     {
-        if (parseargs(argc, (uint8_t**)argv))
-            return (1);
-         if (context.hfun == 1)
-         {
-            md5();
-            return (0);
-         }
-         else if (context.hfun == 2)
-         {
-            sha256();
-            return (0);
-         }
+        if (!(ret = parseargs(argc, (uint8_t**)argv)))
+        {
+            if (context.hfun == 1)
+               md5();
+            else if (context.hfun == 2)
+               sha256();
+        }
+		if (context.fd != -1)
+			close(context.fd);
+		if (context.data)
+			free(context.data);
+        if (context.ctx)
+			free(context.ctx);
     }
-    return 1;
+    return (ret);
 }

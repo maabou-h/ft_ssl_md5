@@ -35,7 +35,7 @@ uint8_t ssl_getopt(uint32_t nargs, char const* args[], uint32_t *optind)
 	else if ((!ft_strcmp("--string", args[*optind]) || !ft_strcmp("-s", args[*optind])) && *optind + 1 < nargs)
 	{
        *optind += 1;
-	   context.data = (uint8_t*)args[*optind];
+	   context.data = (uint8_t*)ft_strdup(args[*optind]);
 	   context.ctx = (uint8_t*)ft_strdup("MD5(string");
 		return 's';
 	}
