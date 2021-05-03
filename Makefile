@@ -36,7 +36,7 @@ clean	:
 	$(RM) $(OBJS) && $(MAKE) clean -C libft
 
 fclean	:	clean
-	$(RM) $(NAME) libft/libft.a
+	$(RM) $(NAME) && $(MAKE) clean -C libft
 
 re		:	fclean all
 
